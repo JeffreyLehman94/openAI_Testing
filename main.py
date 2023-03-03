@@ -4,7 +4,6 @@ from gpt_test import request_gpt
 import time
 from openMethods import *
 
-
 def joinSubs():
     with open('subreddits.txt') as file:
         for line in file:
@@ -20,7 +19,6 @@ def checkShadowBan(username):
         print(reddit.redditor(username).comment_karma)
     except Exception as e:
         print(str(e) + '\n Probably shadow banned!')
-
 
 def getSubKeywords(debug):
     SUBREDDITS = list(SUBREDDITS_KEYWORDS.keys())
@@ -75,7 +73,3 @@ reddit = praw.Reddit(
     password=CLIENT_PASSWORD[0],
     user_agent=CLIENT_USER_AGENT[0]
 )
-# checkShadowBan(CLIENT_USERNAME[0])
-# main(0)
-# getSubKeywords()
-print(getResponse('Test test. Does this work?', 'TEST'))
