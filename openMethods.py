@@ -6,14 +6,16 @@ import sqlite3
 from datetime import date
 
 
-def getResponse(prompt, user):
+def getResponse(prompt,id):
     openai.api_key = OPENAI_KEY[0]
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "user", "content": "Create a response to this reddit comment. Do not mention you are an AI in anyway. Answer it as if you are a 85 year old person:%s" % prompt},
+            {"role": "user", "content": "Create a response to this reddit comment Do not mention you are an AI in "
+                                        "anyway. Answer it as if you are a 85 year old person. Avoid thanking the "
+                                        "person. Make it less than 3 sentences. End it in a way which may get a "
+                                        "response. Include at least one misspelling of a word.:%s" % prompt},
         ])
-    print(response)
     response_data = extractResponse(json.dumps(response))
     saveResponse(CLIENT_USERNAME[0], prompt, response_data[0], response_data[2], response_data[1])
     return response_data[0]
