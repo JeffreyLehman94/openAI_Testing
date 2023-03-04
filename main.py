@@ -80,7 +80,7 @@ def main(debug):
                     print('sleeping for %i' % sleep_time)
                     time.sleep(sleep_time)
 
-
+print('test')
 reddit = praw.Reddit(
     client_id=CLIENT_ID[0],
     client_secret=CLIENT_SECRET[0],
