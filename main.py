@@ -59,12 +59,6 @@ def main(debug):
     subreddit = reddit.subreddit(SUBREDDIT_KEYWORDS[0])
     search_query = SUBREDDIT_KEYWORDS[1]
     checkShadowBan(CLIENT_USERNAME[0])
-    if debug == 1:
-        print(CLIENT_ID[0] + '\n')
-        print(CLIENT_SECRET[0] + '\n')
-        print(CLIENT_USERNAME[0] + '\n')
-        print(CLIENT_PASSWORD[0] + '\n')
-        print(CLIENT_USER_AGENT[0] + '\n')
     if debug == 1: print('Searching for post...')
     for submission in subreddit.hot(limit=10):
         if not submission.archived and not getAlreadyPosted(submission.id):
