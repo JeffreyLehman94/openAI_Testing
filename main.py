@@ -4,6 +4,10 @@ import time
 from openMethods import *
 
 
+# todo: Add more subreddits/keywords OR reconfigure to response to top comment
+# todo: Remove debug stuff
+# todo: Work on prompt - it is not engaging enough and sometimes responds as if the commenter is talking to it
+
 def joinSubs():
     with open('subreddits.txt') as file:
         for line in file:
@@ -38,10 +42,10 @@ def getAlreadyPosted(id):
     cur = con.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS REDDIT_POSTS(DATE, USER, ID)")
     con.commit()
-    cur.execute("SELECT * FROM REDDIT_POSTS WHERE USER IS ? AND ID IS ?",(CLIENT_USERNAME[0], id))
+    cur.execute("SELECT * FROM REDDIT_POSTS WHERE USER IS ? AND ID IS ?", (CLIENT_USERNAME[0], id))
     rows = cur.fetchall()
-    if(len(rows) == 0):
-        cur.execute(" INSERT INTO REDDIT_POSTS VALUES(?, ?, ?)",(date.today(),CLIENT_USERNAME[0],id))
+    if (len(rows) == 0):
+        cur.execute(" INSERT INTO REDDIT_POSTS VALUES(?, ?, ?)", (date.today(), CLIENT_USERNAME[0], id))
         con.commit()
     else:
         print('ALREADY COMMENTED ON THIS POST')
@@ -78,7 +82,9 @@ def main(debug):
                     comment.reply(reply_text)
                     print("COMMENT MADE\n")
                     comments_in_thread += 1
-                    time.sleep(random.randint(60 * 5, 60 * 10))
+                    sleep_time = random.randint(60 * 10, 60 * 15)
+                    print('sleeping for %i' % sleep_time)
+                    time.sleep(sleep_time)
 
 
 reddit = praw.Reddit(
